@@ -82,6 +82,29 @@ bignum xor(const bignum a, const bignum b) {
 	return result;
 }
 
+bignum ones(bignum a) {
+	bignum result;
+	result.bytes = a.bytes;
+	result.num = (char *)calloc(result.bytes, sizeof(char));
+	
+	for(int i = 0; i < result.bytes; i++)
+		result.num[i] = a.num[i] ^ 255;
+	
+	return result;
+}
+
+bignum sum(bignum a, bignum b) {
+	bignum result;
+	result.bytes = max(a.bytes, b.bytes) + 1;
+	result.num = (char *)calloc(result.bytes, sizeof(char));
+	int minBytes = min(a.bytes, b.bytes);
+	
+	char carry = 0;
+	for(int i = 0; i < minBytes; i++) {
+		if()
+	}
+}
+
 int main(int argc, char *argv[]) {
 	bignum a;
 	a.bytes = 2;
@@ -92,9 +115,9 @@ int main(int argc, char *argv[]) {
 	bignum b;
 	b.bytes = 1;
 	b.num = (char *)calloc(b.bytes, sizeof(char));
-	b.num[0] = 22;
+	b.num[0] = 16;
 	
-	bignum c = xor(a, b);
+	bignum c = ones(b);
 	
 	printBignum(c);
 }
