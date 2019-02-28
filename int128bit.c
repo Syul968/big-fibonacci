@@ -35,6 +35,42 @@ void addBit(char **string, int *len, int carry){
     }
 }
 
+struct int128bit and(struct int128bit a, struct int128bit b) {
+    struct int128bit result;
+    result.left = a.left & b.left;
+    result.right = a.right & b.right;
+    return result;
+}
+
+struct int128bit or(struct int128bit a, struct int128bit b) {
+    struct int128bit result;
+    result.left = a.left | b.left;
+    result.right = a.right | b.right;
+    return result;
+}
+
+struct int128bit xor(struct int128bit a, struct int128bit b) {
+    struct int128bit result;
+    result.left = a.left ^ b.left;
+    result.right = a.right ^ b.right;
+    return result;
+}
+
+struct int128bit ones(struct int128bit a) {
+    struct int128bit result;
+    unsigned long long max = 0b1111111111111111111111111111111111111111111111111111111111111111;
+    result.left = a.left ^ max;
+    result.right = a.right ^ max;
+    return result;
+}
+
+struct int128bit twos(struct int128bit a) {
+    struct int128bit onesComplement = ones(a);
+    struct int128bit one;
+    setValues(&one, 0, 1);
+    return add(onesComplement, one);
+}
+
 char *toString(struct int128bit n){
     int len = 1;
     char *string = malloc(len + 1);
