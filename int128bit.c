@@ -71,6 +71,19 @@ struct int128bit twos(struct int128bit a) {
     return add(onesComplement, one);
 }
 
+struct int128bit leftShift(struct int128bit a, int n) {
+    struct int128bit result;
+    result.left = a.left;
+    result.right = a.right;
+    while(n--) {
+        result.left = result.left << 1;
+        result.right = result.right << 1;
+        if(result.left < a.left)
+            result.right++;
+    }
+    return result;
+}
+
 char *toString(struct int128bit n){
     int len = 1;
     char *string = malloc(len + 1);

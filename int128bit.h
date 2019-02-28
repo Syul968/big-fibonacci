@@ -11,3 +11,4 @@ struct int128bit or(struct int128bit a, struct int128bit b);
 struct int128bit xor(struct int128bit a, struct int128bit b);
 struct int128bit ones(struct int128bit a);
 struct int128bit twos(struct int128bit a);
+struct int128bit leftShift(struct int128bit a, int n);
