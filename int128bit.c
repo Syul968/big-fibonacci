@@ -78,9 +78,25 @@ struct int128bit leftShift(struct int128bit a, int n) {
     while(n--) {
         result.left = result.left << 1;
         result.right = result.right << 1;
-        if(result.left < a.left)
-            result.right++;
+        if(result.right < a.right)
+            result.left++;
     }
+    return result;
+}
+
+struct int128bit rightShift(struct int128bit a, int n) {
+    struct int128bit result;
+    result.left = a.left;
+    result.right = a.right;
+    int carry;
+    while(n--) {
+        carry = (result.left & 1);
+        result.left = result.left >> 1;
+        result.right = result.right >> 1;
+        if(carry == 1)
+            result.right += 0b1000000000000000000000000000000000000000000000000000000000000000;
+    }
+    
     return result;
 }
 
